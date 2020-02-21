@@ -32,8 +32,10 @@ public class DBUtility {
 	public static boolean closeConnection() throws FlightAppDaoException {
 		boolean connectionClosed = false;
 		try {
-			connection.close();
-			connectionClosed = true;
+			if (connection != null && !connection.isClosed()) {
+				connection.close();
+				connectionClosed = true;
+			}
 		} catch (SQLException e) {
 			throw new FlightAppDaoException(e.getMessage(), e);
 		}
