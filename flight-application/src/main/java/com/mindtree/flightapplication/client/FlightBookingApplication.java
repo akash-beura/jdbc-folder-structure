@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.mindtree.flightapplication.entity.Flight;
 import com.mindtree.flightapplication.entity.Person;
+import com.mindtree.flightapplication.exception.FlighApplicationException;
 import com.mindtree.flightapplication.exception.service.FlightAppServiceException;
 import com.mindtree.flightapplication.service.FlightService;
 import com.mindtree.flightapplication.service.PersonService;
@@ -62,7 +63,7 @@ public class FlightBookingApplication {
 		int flightId = getInt();
 		try {
 			result = flightService.bookFlight(personId, flightId);
-		} catch (FlightAppServiceException e) {
+		} catch (FlighApplicationException e) {
 			System.err.println(e.getMessage());
 		}
 		return result;
@@ -99,7 +100,7 @@ public class FlightBookingApplication {
 					} else {
 						System.out.println("Flight registration failed");
 					}
-				} catch (FlightAppServiceException e) {
+				} catch (FlighApplicationException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
@@ -111,7 +112,7 @@ public class FlightBookingApplication {
 					} else {
 						System.out.println("Person registration failed");
 					}
-				} catch (FlightAppServiceException e) {
+				} catch (FlighApplicationException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
@@ -125,15 +126,15 @@ public class FlightBookingApplication {
 			case 4:
 				try {
 					displayFlight(flightService.getAllFlights());
-				} catch (FlightAppServiceException e) {
+				} catch (FlighApplicationException e) {
 					System.out.println(e.getMessage());
 				}
 				break;
 			case 5:
 				try {
 					diplayPersons(personService.getFilteredPersons());
-				} catch (FlightAppServiceException e) {
-					e.printStackTrace();
+				} catch (FlighApplicationException e) {
+					System.out.println(e.getMessage());
 				}
 				break;
 			default:
